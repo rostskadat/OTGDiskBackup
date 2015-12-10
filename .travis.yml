@@ -14,7 +14,7 @@ script: ./gradlew clean assemble
 before_deploy: echo 'Deploying to BINTRAY'
 deploy:
   provider: bintray
-  file: .bintray.json
+  file: .bintray
   user: rostskadat
   key:
     secure: Hm/fUlzqK1Af6UPvyHp+ZBAferL45BpNrULeMH9hgbgxK6xld/HLdmnXLs+bKg/TOwq4MrvP54FeQSm5pray01R7lZ49IiaJSz8WPf+8w+n+cKzziBNbvYPuODu5NCBiyhIQcFRoagC1faCicPQ7wuhjlkTB0tghqaMYZRZQDrfrPigiiJTNq/AsVqzGhzvZXzJtpj0CXdS13bQs5weWadppjM9/rJ8ahJwK5vaE+Urhx8waxArCR7Aj6hYnDD90rDDXnzvBl4QH1v+sy8v4wY+Ng4yrDQDsbdWk6c5IuLdUBpw3NxsLFMX6YQTVBNWKnplFFrVailQzxKlQPSF0FtLQsHSzh0HqNDVYEbW+jix+RlUaSXPOJYmqL1SuM5xwkkr7e1VpX5DLyXXJWCRLvtXsGv5dGBFESNIwiAYSxr91yM4Cvq4JT5gJvLLOUNP6FPMSuiM3Q3y1zo7AffQ4CTrZBZBCHMQdv/FYlP93X6lsjNh6DgZybM5E9CGdBejKJt4IDbW+38ftAJUSuAvmMDoqUQ2uKVrtnMHnVhB1byK+tSjOcOUZc3qoUVCz+YO9iLO34gwmJ7xE0jFUwDwJGKlqiyg4w9RH4PkMnpWNR0Jfhyuu96S1i8hqc9ycA/F6v9Bv8cYX0yGiYmIKuK3C4On531E3Uvqwog+KTJjHf2c=
