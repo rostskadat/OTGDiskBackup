@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  Mass-storage class / MSC-BOT (Bulk-Only Transport) -->
+    <usb-device
+        class="8"
+        subclass="6" />
+</resources>

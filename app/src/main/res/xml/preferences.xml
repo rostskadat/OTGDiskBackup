@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory>
+        <EditTextPreference
+            android:name="EditTextFrom"
+            android:defaultValue="@string/from_file"
+            android:key="net.pictulog.otgdb.from_file"
+            android:summary="@string/from_summary"
+            android:title="@string/from" />
+        <Preference
+            android:name="EditTextTo"
+            android:defaultValue="@string/to_file"
+            android:key="net.pictulog.otgdb.to_file"
+            android:onClick="startFileChooser"
+            android:summary="@string/to_summary"
+            android:title="@string/to" />
+
+        <CheckBoxPreference
+            android:name="CheckBoxPreferenceOverwrite"
+            android:defaultValue="true"
+            android:key="net.pictulog.otgdb.overwrite"
+            android:summary="@string/overwrite_summary"
+            android:title="@string/overwrite" />
+        <CheckBoxPreference
+            android:name="CheckBoxPreferenceDelete"
+            android:defaultValue="false"
+            android:key="net.pictulog.otgdb.delete"
+            android:summary="@string/delete_summary"
+            android:title="@string/delete" />
+        <CheckBoxPreference
+            android:name="CheckBoxPreferenceDebug"
+            android:defaultValue="false"
+            android:key="net.pictulog.otgdb.debug"
+            android:summary="@string/debug_summary"
+            android:title="@string/debug" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
