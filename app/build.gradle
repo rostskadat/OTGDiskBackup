@@ -16,6 +16,15 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def newName = output.outputFile.name
+                    // newName = newName.replace("app-", "$rootProject.ext.appName-")
+                    newName = newName.replace("app-", "OTGDiskBackup-")
+                    newName = newName.replace("-release", "-release")
+                    output.outputFile = new File(output.outputFile.parent, newName)
+                }
+            }
         }
     }
     lintOptions {
