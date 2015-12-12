@@ -10,7 +10,7 @@ cache:
   directories:
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
-script: ./gradlew clean assemble
+script: ./gradlew clean assembleRelease
 before_deploy: echo 'Deploying to BINTRAY'
 deploy:
   provider: bintray
