@@ -1,7 +1,4 @@
 [![Build Status](https://travis-ci.org/rostskadat/OTGDiskBackup.svg?branch=master)](https://travis-ci.org/rostskadat/OTGDiskBackup)
-[![Code Climate](https://codeclimate.com/github/rostskadat/OTGDownloader/badges/gpa.svg)](https://codeclimate.com/github/rostskadat/OTGDownloader)
-[![Test Coverage](https://codeclimate.com/github/rostskadat/OTGDownloader/badges/coverage.svg)](https://codeclimate.com/github/rostskadat/OTGDownloader/coverage)
-[![Issue Count](https://codeclimate.com/github/rostskadat/OTGDownloader/badges/issue_count.svg)](https://codeclimate.com/github/rostskadat/OTGDownloader)
 [![Download](https://api.bintray.com/packages/rostskadat/android/OTGDiskBackup/images/download.svg) ](https://bintray.com/rostskadat/android/OTGDiskBackup/_latestVersion)
 
 

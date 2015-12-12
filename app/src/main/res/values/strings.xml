@@ -15,12 +15,15 @@
     <string name="to">To</string>
     <string name="to_summary">The folder on the Device to copy to</string>
     <string name="to_file">Specify the destination folder</string>
+    <string name="extensions">Filter extensions</string>
+    <string name="extensions_list">jpg,raw</string>
+    <string name="extensions_summary">The extensions to backup</string>
     <string name="overwrite">Overwrite files</string>
     <string name="overwrite_summary">Whether to overwrite existing files</string>
     <string name="delete">Delete files</string>
     <string name="delete_summary">Whether to delete files upon backup</string>
     <string name="debug">Debug</string>
-    <string name="debug_summary">Whether to write a log file called /sdcard/OTGDownloder.log</string>
+    <string name="debug_summary">Whether to a mock device (for debugging only)</string>
     <string name="writePermissionRequired">You must grant access to the internal storage.</string>
 
     <string name="pleaseWait">Please wait&#8230;</string>
@@ -30,5 +33,11 @@
     <string name="diskReady">Disk ready</string>
     <string name="backingUp">Backing up files&#8230;</string>
     <string name="backingUpFailed">Some files failed to backup</string>
+
+    <string name="missingFromTo">Missing from/to preferences&#8230;</string>
+    <string name="invalidFromTo">Invalid from/to preferences&#8230;</string>
+    <string name="noFileToBackup">No files to backup&#8230;</string>
+    <string name="listViewLabel">Files found on the SD card:</string>
+
 
 </resources>

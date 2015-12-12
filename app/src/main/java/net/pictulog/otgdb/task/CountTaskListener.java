@@ -18,11 +18,13 @@
  */
 package net.pictulog.otgdb.task;
 
+import java.util.List;
+
 /**
  * @author rostskadat
  */
 public interface CountTaskListener {
 
-    void onCountReady(int count);
+    void onCountReady(List<String> files);
 
 }

@@ -39,4 +39,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'de.waldheinz:fat32-lib:0.6.5'
     compile 'com.nononsenseapps:filepicker:2.2.3'
+    compile 'commons-io:commons-io:2.4'
 }

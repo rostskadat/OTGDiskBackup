@@ -30,6 +30,7 @@ public class PreferencesActivity extends PreferenceActivity {
     public static final String PREFS_FIRST_LAUNCH = "net.pictulog.otgdb.first_launch";
     public static final String PREFS_FROM_FILE = "net.pictulog.otgdb.from_file";
     public static final String PREFS_TO_FILE = "net.pictulog.otgdb.to_file";
+    public static final String PREFS_EXTENSION = "net.pictulog.otgdb.extensions";
     public static final String PREFS_OVERWRITE = "net.pictulog.otgdb.overwrite";
     public static final String PREFS_DELETE = "net.pictulog.otgdb.delete";
     public static final String PREFS_DEBUG = "net.pictulog.otgdb.debug";
@@ -39,9 +40,6 @@ public class PreferencesActivity extends PreferenceActivity {
     }
 
     protected boolean isValidFragment(String fragmentName) {
-        if (PreferencesActivityFragment.class.getName().equals(fragmentName)) {
-            return true;
-        }
-        return false;
+        return !PreferencesActivityFragment.class.getName().equals(fragmentName);
     }
 }

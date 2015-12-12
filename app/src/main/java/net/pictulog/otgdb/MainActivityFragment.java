@@ -29,7 +29,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import net.pictulog.otgdb.task.BackupTask;
@@ -42,6 +44,8 @@ import net.pictulog.otgdb.task.NavigateTask;
 import net.pictulog.otgdb.task.NavigateTaskListener;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import de.waldheinz.fs.FileSystem;
@@ -53,10 +57,11 @@ import de.waldheinz.fs.FsDirectory;
 public class MainActivityFragment extends Fragment implements MountTaskListener, NavigateTaskListener, CountTaskListener, BackupTaskListener {
 
     private Button btnBackup;
+    private ListView listView;
+    private ArrayAdapter<String> adapter;
+    private List<String> files;
     private ProgressDialog progressDialog;
     private FsDirectory fromDir;
-    private int fileCount = -1;
-
 
     public MainActivityFragment() {
     }
@@ -73,6 +78,10 @@ public class MainActivityFragment extends Fragment implements MountTaskListener,
             }
         });
         btnBackup.setEnabled(false);
+        files = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(getContext(), R.layout.file, files);
+        listView = (ListView) view.findViewById(R.id.listView);
+        listView.setAdapter(adapter);
         new MountTask(this, getContext()).execute();
         return view;
     }
@@ -85,7 +94,7 @@ public class MainActivityFragment extends Fragment implements MountTaskListener,
         if (!settings.contains(PreferencesActivity.PREFS_FROM_FILE)
                 || !settings.contains(PreferencesActivity.PREFS_TO_FILE)) {
             Log.e("MainActivityFragment", "Missing from/to preferences...");
-            Toast.makeText(context, "Missing from/to preferences...", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.missingFromTo, Toast.LENGTH_LONG).show();
             btnBackup.setEnabled(false);
             return;
         }
@@ -93,19 +102,19 @@ public class MainActivityFragment extends Fragment implements MountTaskListener,
         File to = new File(settings.getString(PreferencesActivity.PREFS_TO_FILE, ""));
         if (!to.exists()) {
             Log.e("MainActivityFragment", "Invalid from/to preferences...");
-            Toast.makeText(context, "Invalid from/to preferences...", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.invalidFromTo, Toast.LENGTH_LONG).show();
             btnBackup.setEnabled(false);
             return;
         }
         Log.i("MainActivityFragment", "Copying all files from OTG Disk to " + to);
         try {
             FsDirectory srcDir = fromDir;
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            File destDir = new File(sharedPreferences.getString(PreferencesActivity.PREFS_TO_FILE,
+            File destDir = new File(settings.getString(PreferencesActivity.PREFS_TO_FILE,
                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath()));
-            boolean delete = sharedPreferences.getBoolean(PreferencesActivity.PREFS_DELETE, false);
-            boolean overwrite = sharedPreferences.getBoolean(PreferencesActivity.PREFS_DELETE, false);
-            new BackupTask(this, srcDir, destDir, delete, overwrite).execute();
+            List<String> extensions = Arrays.asList(settings.getString(PreferencesActivity.PREFS_EXTENSION, "").split(","));
+            boolean delete = settings.getBoolean(PreferencesActivity.PREFS_DELETE, false);
+            boolean overwrite = settings.getBoolean(PreferencesActivity.PREFS_OVERWRITE, false);
+            new BackupTask(this, srcDir, destDir, extensions, delete, overwrite).execute();
         } catch (Exception e) {
             progressDialog.dismiss();
             Log.e("MainActivityFragment", e.getMessage(), e);
@@ -136,18 +145,23 @@ public class MainActivityFragment extends Fragment implements MountTaskListener,
         this.fromDir = fromDir;
         btnBackup.setEnabled(true);
         try {
-            new CountTask(this, fromDir).execute();
+            List<String> extensions = Arrays.asList(PreferenceManager.getDefaultSharedPreferences(getContext()).getString(PreferencesActivity.PREFS_EXTENSION, "").split(","));
+            new CountTask(this, fromDir, extensions).execute();
         } catch (Exception e) {
             Log.e("MainActivityFragment", e.getMessage(), e);
             Toast.makeText(getContext(), R.string.mountingFailed, Toast.LENGTH_LONG).show();
         }
     }
 
-    public void onCountReady(int count) {
-        this.fileCount = count;
-        if (count <= 0) {
+    public void onCountReady(List<String> files) {
+        this.files.clear();
+        if (files.size() <= 0) {
             btnBackup.setEnabled(false);
+            Toast.makeText(getContext(), R.string.noFileToBackup, Toast.LENGTH_SHORT).show();
+        } else {
+            this.files.addAll(files);
         }
+        adapter.notifyDataSetChanged();
     }
 
     /*
@@ -158,13 +172,13 @@ public class MainActivityFragment extends Fragment implements MountTaskListener,
     @Override
     public void onBackupStart() {
         btnBackup.setEnabled(false);
-        Log.d("MainActivityFragment", "Backing up " + fileCount + " files...");
+        Log.d("MainActivityFragment", "Backing up " + files.size() + " files...");
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setCancelable(false);
         progressDialog.setMessage(getText(R.string.backingUp));
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setProgress(0);
-        progressDialog.setMax(fileCount);
+        progressDialog.setMax(files.size());
         progressDialog.show();
     }
 
@@ -173,7 +187,8 @@ public class MainActivityFragment extends Fragment implements MountTaskListener,
         try {
             Log.i("MainActivityFragment", "Backup complete");
             btnBackup.setEnabled(true);
-            new CountTask(this, fromDir).execute();
+            List<String> extensions = Arrays.asList(PreferenceManager.getDefaultSharedPreferences(getContext()).getString(PreferencesActivity.PREFS_EXTENSION, "").split(","));
+            new CountTask(this, fromDir, extensions).execute();
             if (progressDialog != null) {
                 progressDialog.dismiss();
             }

@@ -20,6 +20,9 @@ package net.pictulog.otgdb.task;
 
 import android.util.Log;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,6 +46,7 @@ public class BackupTask extends AbstractTask<Void, Integer, List<String>> {
 
     private final FsDirectory srcDir;
     private final File destDir;
+    private final List<String> extensions;
     private final boolean overwrite;
     private final boolean delete;
     private final BackupTaskListener listener;
@@ -51,10 +55,11 @@ public class BackupTask extends AbstractTask<Void, Integer, List<String>> {
     private List<String> failedToBackup = new ArrayList<String>();
     private int currentFile = 0;
 
-    public BackupTask(BackupTaskListener listener, FsDirectory srcDir, File destDir, boolean delete, boolean overwrite) {
+    public BackupTask(BackupTaskListener listener, FsDirectory srcDir, File destDir, List<String> extensions, boolean delete, boolean overwrite) {
         this.listener = listener;
         this.srcDir = srcDir;
         this.destDir = destDir;
+        this.extensions = extensions;
         this.delete = delete;
         this.overwrite = overwrite;
     }
@@ -111,8 +116,8 @@ public class BackupTask extends AbstractTask<Void, Integer, List<String>> {
     }
 
     @Override
-    protected void visitFile(FsDirectoryEntry entry, File targetDirectory) throws IOException {
-        if (entry == null || !entry.isFile()) {
+    protected void visitFile(FsDirectoryEntry file, File targetDirectory) throws IOException {
+        if (file == null || !file.isFile()) {
             throw new IllegalArgumentException("entry must be an existing file");
         }
         if (targetDirectory == null || !targetDirectory.exists() || !targetDirectory.isDirectory()
@@ -120,19 +125,27 @@ public class BackupTask extends AbstractTask<Void, Integer, List<String>> {
             throw new IllegalArgumentException(
                     "targetDirectory '" + targetDirectory + "' must be an existing writable directory");
         }
-        if (copyFile(entry.getFile(), new File(targetDirectory, entry.getName()))) {
+        String entryName = file.getName();
+        String extensionUpper = FilenameUtils.getExtension(entryName).toUpperCase();
+        String extensionLower = FilenameUtils.getExtension(entryName).toLowerCase();
+        if (!extensions.isEmpty() && !extensions.contains(extensionUpper) && !extensions.contains(extensionLower)) {
+            return;
+        }
+        if (copyFile(file.getFile(), new File(targetDirectory, entryName))) {
             if (delete) {
-                fileToDelete.peek().add(entry.getName());
+                fileToDelete.peek().add(entryName);
             }
         } else {
-            failedToBackup.add(entry.getName());
+            failedToBackup.add(entryName);
         }
     }
 
     @Override
     protected void preVisitDirectory(FsDirectoryEntry directory, File targetDirectory) throws IOException {
         if (!targetDirectory.exists()) {
-            targetDirectory.mkdirs();
+            if (!targetDirectory.mkdirs()) {
+                Log.w("BackupTask", "Failed to create directory "+targetDirectory.getAbsolutePath());
+            }
         }
         if (delete) {
             fileToDelete.push(new ArrayList<String>());
@@ -166,13 +179,7 @@ public class BackupTask extends AbstractTask<Void, Integer, List<String>> {
             } catch (IOException e) {
                 Log.e("BackupTask", e.getMessage(), e);
             } finally {
-                if (fos != null) {
-                    try {
-                        fos.close();
-                    } catch (IOException e) {
-                        Log.e("BackupTask", e.getMessage());
-                    }
-                }
+                IOUtils.closeQuietly(fos);
             }
         }
         return false;

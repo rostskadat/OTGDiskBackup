@@ -15,6 +15,12 @@
             android:onClick="startFileChooser"
             android:summary="@string/to_summary"
             android:title="@string/to" />
+        <EditTextPreference
+            android:name="EditTextExtensions"
+            android:defaultValue="true"
+            android:key="net.pictulog.otgdb.extensions"
+            android:summary="@string/extensions_summary"
+            android:title="@string/extensions" />
 
         <CheckBoxPreference
             android:name="CheckBoxPreferenceOverwrite"

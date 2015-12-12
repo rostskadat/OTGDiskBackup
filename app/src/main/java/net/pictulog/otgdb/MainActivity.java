@@ -36,7 +36,6 @@ import com.nononsenseapps.filepicker.FilePickerActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final boolean USE_USB_MOCK = false;
     public static final String ACTION_USB_PERMISSION = "net.pictulog.otgdb.USB_PERMISSION";
     public static final int FILE_CODE = 12345;
     private static final String PREFERENCES_ACTIVITY = PreferencesActivity.class.getName();
@@ -132,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(PreferencesActivity.PREFS_FROM_FILE, getText(R.string.from_file).toString());
             editor.putString(PreferencesActivity.PREFS_TO_FILE,
                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath());
+            editor.putString(PreferencesActivity.PREFS_EXTENSION,
+                    getText(R.string.extensions_list).toString());
             editor.putBoolean(PreferencesActivity.PREFS_FIRST_LAUNCH, false);
             editor.apply();
         } else {

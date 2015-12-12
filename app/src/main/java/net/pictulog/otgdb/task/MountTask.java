@@ -79,8 +79,8 @@ public class MountTask extends AsyncTask<Void, Void, FileSystem> {
     @Override
     protected FileSystem doInBackground(Void... params) {
         try {
-            if (MainActivity.USE_USB_MOCK) {
-                return setupMockDevice();
+            if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PreferencesActivity.PREFS_DEBUG, false)) {
+                return mountMockDevice();
             }
             return mountDevice();
         } catch (Exception e) {
@@ -100,7 +100,7 @@ public class MountTask extends AsyncTask<Void, Void, FileSystem> {
         }
     }
 
-    private FileSystem setupMockDevice() throws IOException {
+    private FileSystem mountMockDevice() throws IOException {
         Log.d("MountTask", "creating fs hierarchy...");
         BlockDevice dev = new RamDisk(100 * 1024 * 1024);
         Log.d("MountTask", "BlockDevice created...");

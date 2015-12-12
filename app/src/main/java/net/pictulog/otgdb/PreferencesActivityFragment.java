@@ -39,7 +39,6 @@ public class PreferencesActivityFragment extends PreferenceFragment {
     private static final int REQUEST_CODE_FROM = 0;
     private static final int REQUEST_CODE_TO = 1;
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP_MR1)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

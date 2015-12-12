@@ -20,8 +20,13 @@ package net.pictulog.otgdb.task;
 
 import android.util.Log;
 
+import org.apache.commons.io.FilenameUtils;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 import de.waldheinz.fs.FsDirectory;
 import de.waldheinz.fs.FsDirectoryEntry;
@@ -37,11 +42,14 @@ public class CountTask extends AbstractTask<Void, Void, Void> {
 
     private final CountTaskListener listener;
     private final FsDirectory srcDir;
-    private int count = 0;
+    private final List<String> extensions;
+    private List<String> files = new ArrayList<String>();
+    private Stack<String> pathFragments = new Stack<String>();
 
-    public CountTask(CountTaskListener listener, FsDirectory srcDir) {
+    public CountTask(CountTaskListener listener, FsDirectory srcDir, List<String> extensions) {
         this.listener = listener;
         this.srcDir = srcDir;
+        this.extensions = extensions;
     }
 
     @Override
@@ -50,7 +58,7 @@ public class CountTask extends AbstractTask<Void, Void, Void> {
             Log.d("CountTask", "Counting files...");
             countFiles();
         } catch (Exception e) {
-            // Souldn't be raised...
+            // Shouldn't be raised...
             Log.e("CountTask", e.getMessage(), e);
         }
         return null;
@@ -59,31 +67,44 @@ public class CountTask extends AbstractTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
-        listener.onCountReady(count);
+        listener.onCountReady(files);
     }
 
     private void countFiles() {
         try {
             walkFileTree(srcDir, new File(""));
         } catch (Exception e) {
-            // Souldn't be raised...
+            // Shouldn't be raised...
             Log.e("CountTask", e.getMessage(), e);
         }
     }
 
     @Override
     protected void visitFile(FsDirectoryEntry file, File targetDirectory) throws IOException {
-        count++;
+        String entryName = file.getName();
+        String extensionUpper = FilenameUtils.getExtension(entryName).toUpperCase();
+        String extensionLower = FilenameUtils.getExtension(entryName).toLowerCase();
+        if (!extensions.isEmpty() && !extensions.contains(extensionUpper) && !extensions.contains(extensionLower)) {
+            return;
+        }
+        StringBuilder path = new StringBuilder("/");
+        for (String pathFragment : pathFragments) {
+            path.append(pathFragment).append("/");
+        }
+        path.append(file.getName());
+        files.add(path.toString());
     }
 
     @Override
     protected void preVisitDirectory(FsDirectoryEntry directory, File targetDirectory) throws IOException {
         // NA
+        pathFragments.push(directory.getName());
     }
 
     @Override
     protected void postVisitDirectory(FsDirectoryEntry directory, File targetDirectory) throws IOException {
         // NA
+        pathFragments.pop();
     }
 
 }
