@@ -40,6 +40,6 @@ public class PreferencesActivity extends PreferenceActivity {
     }
 
     protected boolean isValidFragment(String fragmentName) {
-        return !PreferencesActivityFragment.class.getName().equals(fragmentName);
+        return PreferencesActivityFragment.class.getName().equals(fragmentName);
     }
 }
