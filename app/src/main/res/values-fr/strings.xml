@@ -26,7 +26,6 @@
     <string name="pluginDisk">Brancher le disk avec le câble OTG</string>
     <string name="settingsCategory">Paramètres de sauvegarde</string>
     <string name="to">Vers</string>
-    <string name="to_file"></string>
     <string name="to_summary">Le répertoire de destination sur la tablet</string>
     <string name="writePermissionRequired">Vous devez autoriser l\'ecriture sur le disque interne (Storage)</string>
 </resources>
