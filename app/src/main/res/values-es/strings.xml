@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OTGDiskBackup</string>
+    <string name="action_about">Acerca de</string>
+    <string name="action_backup">Copiar mis ficheros</string>
+    <string name="action_settings">Parametros</string>
+    <string name="backingUp">Copiendo mis ficheros…</string>
+    <string name="backingUpFailed">Algunos ficheros no han sido copiados correctamente</string>
+    <string name="debug">Debug</string>
+    <string name="debug_summary">Utilizar un Mock Device</string>
+    <string name="delete">Borrar los ficheros</string>
+    <string name="delete_summary">Borrar los ficheros despues que han sido copiados</string>
+    <string name="diskReady">Disco listo</string>
+    <string name="extensions">Filtrar las extensiones</string>
+    <string name="extensions_summary">Una lista de extensiones a filtrar</string>
+    <string name="from">Desde</string>
+    <string name="from_summary">La carpeta en la tarjeta SD desde donde copiar</string>
+    <string name="invalidFromTo">Parametro Desde/Hacia invalido…</string>
+    <string name="listViewLabel">Ficheros encontrados en la tarjeta SD:</string>
+    <string name="missingFromTo">Parametro Desde/Hacia no encontrado…</string>
+    <string name="mountingFailed">Error al montar el disco OTG.</string>
+    <string name="noFileToBackup">No se encontrado ficheros a copiar…</string>
+    <string name="noPermission">Debes permitir la escritura en el disco interno (Storage)</string>
+    <string name="overwrite">Sobrescribir los ficheros</string>
+    <string name="overwrite_summary">Sobrescribir los ficheros si existen</string>
+    <string name="pluginDisk">Enchufar el disco con el cable OTG</string>
+    <string name="settingsCategory">Parametros de copia</string>
+    <string name="to">Hacia</string>
+    <string name="to_summary">La carpeta en la tablet donde escribir</string>
+    <string name="writePermissionRequired">Debes permitir la escritura en el disco interno (Storage)</string>
+</resources>

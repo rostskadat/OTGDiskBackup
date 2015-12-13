@@ -16,7 +16,7 @@
     <string name="from">Depuis</string>
     <string name="from_summary">Le repertoire d\'origine sur la carte SD </string>
     <string name="invalidFromTo">Paramètre Depuis/Vers invalides…</string>
-    <string name="listViewLabel">Fichiers découverts sur la carte SD</string>
+    <string name="listViewLabel">Fichiers découverts sur la carte SD:</string>
     <string name="missingFromTo">Paramètre Depuis/Vers manquants…</string>
     <string name="mountingFailed">Echec au moment de monter le disque OTG.</string>
     <string name="noFileToBackup">Aucun fichier à sauvegarder…</string>
