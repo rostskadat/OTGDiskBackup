@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OTGDiskBackup</string>
+    <string name="action_about">À propos</string>
+    <string name="action_backup">Sauvegarder mes fichiers</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="backingUp">Sauvegarde des fichers…</string>
+    <string name="backingUpFailed">La sauvegarde a échouée pour certains fichiers</string>
+    <string name="debug">Debug</string>
+    <string name="debug_summary">Utiliser un Mock Device</string>
+    <string name="delete">Effacer les fichiers</string>
+    <string name="delete_summary">Effacer les fichiers une fois la sauvegarde effectuée</string>
+    <string name="diskReady">Disque prêt</string>
+    <string name="extensions">Filtrer les extensions</string>
+    <string name="extensions_summary">Une liste d\'extensions a sauvegarder séparées par des virgules</string>
+    <string name="from">Depuis</string>
+    <string name="from_summary">Le repertoire d\'origine sur la carte SD </string>
+    <string name="invalidFromTo">Paramètre Depuis/Vers invalides…</string>
+    <string name="listViewLabel">Fichiers découverts sur la carte SD</string>
+    <string name="missingFromTo">Paramètre Depuis/Vers manquants…</string>
+    <string name="mountingFailed">Echec au moment de monter le disque OTG.</string>
+    <string name="noFileToBackup">Aucun fichier à sauvegarder…</string>
+    <string name="noPermission">Vous devez autoriser l\'ecriture sur le disque interne (Storage)</string>
+    <string name="overwrite">Écraser les fichiers</string>
+    <string name="overwrite_summary">Écraser les fichiers existants</string>
+    <string name="pluginDisk">Brancher le disk avec le câble OTG</string>
+    <string name="settingsCategory">Paramètres de sauvegarde</string>
+    <string name="to">Vers</string>
+    <string name="to_file"></string>
+    <string name="to_summary">Le répertoire de destination sur la tablet</string>
+    <string name="writePermissionRequired">Vous devez autoriser l\'ecriture sur le disque interne (Storage)</string>
+</resources>
