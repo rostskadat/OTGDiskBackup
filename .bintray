@@ -11,7 +11,7 @@
 
   "files":
   [
-    {"includePattern": "app/build/outputs/apk/(.*.apk)", "uploadPattern": "$1"}
+    {"includePattern": "app/build/outputs/apk/(.*release.apk)", "uploadPattern": "$1"}
   ],
   "publish": true
 }
