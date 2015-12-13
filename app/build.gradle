@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-    }
+
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
@@ -12,6 +11,18 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    signingConfigs {
+        if (System.getenv("TRAVIS")) {
+            release {
+                storeFile rootProject.file('release.keystore.jks')
+                storePassword System.getenv("KEYSTORE_PASS")
+                keyAlias System.getenv("ALIAS_NAME")
+                keyPassword System.getenv("ALIAS_PASS")
+            }
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -19,7 +30,6 @@ android {
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     def newName = output.outputFile.name
-                    // newName = newName.replace("app-", "$rootProject.ext.appName-")
                     newName = newName.replace("app-", "OTGDiskBackup-")
                     newName = newName.replace("-release", "-release")
                     output.outputFile = new File(output.outputFile.parent, newName)
