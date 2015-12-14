@@ -28,4 +28,5 @@
     <string name="to">Vers</string>
     <string name="to_summary">Le répertoire de destination sur la tablet</string>
     <string name="writePermissionRequired">Vous devez autoriser l\'ecriture sur le disque interne (Storage)</string>
+    <string name="aboutText">OTGDiskBackup est un outil pour faire facilement une sauvegarde depuis un répertoire d\'une carte SD vers un répertoire de votre téléphone ou tablet Android. Il vous aide quand vous voulez faire un sauvegarde massive des photos de votre appareil photo vers votre tablet Android.</string>
 </resources>

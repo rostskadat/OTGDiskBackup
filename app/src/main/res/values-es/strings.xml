@@ -28,4 +28,5 @@
     <string name="to">Hacia</string>
     <string name="to_summary">La carpeta en la tablet donde escribir</string>
     <string name="writePermissionRequired">Debes permitir la escritura en el disco interno (Storage)</string>
+    <string name="aboutText">OTGDiskBackup es un herramienta sencillo para guardar ficheros desde una carpeta de tu tarjeta SD en una carpeta de tu telefono o tablet Android. Esta util por ejemplo cuando quierres guardar todas las fotos de tu camera digital en tu tablet Android.</string>
 </resources>

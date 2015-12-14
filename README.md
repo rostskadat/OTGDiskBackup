@@ -9,14 +9,20 @@ A Simple OTG disk backup tool.
 
 # Introduction
 
-OTGDiskBackup is s simple backup tool, to transfer easily files from a specific directory on a OTG
+OTGDiskBackup is simple backup tool, to transfer easily files from a specific directory on a OTG
 card to a specific directory on your Android device.
-It can be of help when you want to transfer the pictures taken with your digital camera to your android device and then be able
+It can be of help when you want to transfer the pictures taken with your digital camera to your Android device.
 
 # Questions and issues
 
 The [github issue tracker](https://github.com/rostskadat/OTGDiskBackup/issues) is **_only_** for bug reports and feature requests.
 This program has been tested on a Nexus 5, Nexus 9 and Lenovo Yogo 1380F Tablet
+
+# Third party
+
+This program uses third party software:
+* [fat32-lib](https://github.com/waldheinz/fat32-lib/)
+* [NoNonsense-FilePicker](https://github.com/spacecowboy/NoNonsense-FilePicker/)
 
 # License
 

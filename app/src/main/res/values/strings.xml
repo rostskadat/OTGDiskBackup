@@ -37,5 +37,9 @@
     <string name="noFileToBackup">No files to backup&#8230;</string>
     <string name="listViewLabel">Files found on the SD card:</string>
 
+    <string name="aboutText">OTGDiskBackup is simple backup tool, to transfer easily files from a specific directory on a OTG
+card to a specific directory on your Android device.
+It can be of help when you want to transfer the pictures taken with your digital camera to your Android device.</string>
+
 
 </resources>
